@@ -1,0 +1,10 @@
+# Grafana - monitoring dashboard
+# Domain config: sesuaikan server_name setelah domain tersedia
+server {
+    listen 80;
+    server_name _;  # ganti dengan domain Anda, contoh: monitoring.domain.com
+
+    location / {
+        proxy_pass http://127.0.0.1:{{ grafana_port }};
+    }
+}

@@ -1,0 +1,23 @@
+---
+- name: Setup dev server
+  hosts: dev
+  become: true
+
+  roles:
+    # --- Base
+    - role: base/docker
+      tags: [base, docker]
+
+    # --- Proxy
+    - role: networking/nginx
+      tags: [networking, nginx]
+
+    # --- Monitoring stack
+    - role: monitoring/node_exporter
+      tags: [monitoring, node_exporter]
+
+    - role: monitoring/prometheus
+      tags: [monitoring, prometheus]
+
+    - role: monitoring/grafana
+      tags: [monitoring, grafana]
