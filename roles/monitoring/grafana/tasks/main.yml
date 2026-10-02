@@ -20,6 +20,7 @@
     owner: 472
     group: 472
     mode: "0644"
+  notify: restart grafana
 
 # --- Provisioning: dashboard config
 - name: Template grafana dashboard provisioning
@@ -29,6 +30,7 @@
     owner: 472
     group: 472
     mode: "0644"
+  notify: restart grafana
 
 # --- Dashboard JSON
 - name: Copy custom dashboard
@@ -38,6 +40,7 @@
     owner: 472
     group: 472
     mode: "0644"
+  notify: restart grafana
 
 # --- Network
 - name: Ensure monitoring network exists
@@ -55,7 +58,7 @@
     networks:
       - name: "{{ monitoring_network }}"
     ports:
-      - "127.0.0.1:{{ grafana_port }}:3000"
+      - "{{ grafana_port }}:3000"
     volumes:
       - "{{ grafana_data_dir }}:/var/lib/grafana"
       - "/opt/monitoring/grafana/provisioning:/etc/grafana/provisioning"
